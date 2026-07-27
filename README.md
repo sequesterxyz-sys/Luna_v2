@@ -1,6 +1,6 @@
 # Luna v2
 
-A secure Netlify-ready Luna web app. The browser never receives the Anthropic API key; requests are handled by Netlify Functions.
+A secure Netlify-ready Luna web app. The browser never receives the Anthropic API key; requests are handled by Netlify Functions. deployment retry
 
 ## Deploy with Netlify
 
