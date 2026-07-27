@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<title>Luna</title>
+
+<link href="style.css" rel="stylesheet"/></head>
+<body>
+<header>
+<h1 id="assistantName">luna<span class="dot">.</span></h1>
+<div class="headerbtns">
+<button class="iconbtn" onclick="switchView('identity')">self</button>
+<button class="iconbtn" onclick="switchView('improve')">improve</button>
+<button class="iconbtn" onclick="switchView('settings')">⚙</button>
+</div>
+</header>
+<div id="tabs">
+<div class="tab active" data-view="chat" onclick="switchView('chat')">Chat</div>
+<div class="tab" data-view="identity" onclick="switchView('identity')">Self</div>
+<div class="tab" data-view="improve" onclick="switchView('improve')">Improve</div>
+<div class="tab" data-view="settings" onclick="switchView('settings')">Settings</div>
+</div>
+<main>
+<div class="view active" id="view-chat">
+<div id="messages"></div>
+</div>
+<div class="view" id="view-identity">
+<div class="panel">
+<div class="field">
+<label>Name</label>
+<input id="nameInput" oninput="renameAssistant()"/>
+</div>
+<div class="field">
+<label>Core instructions (its personality &amp; reasoning style)</label>
+<textarea id="systemPromptView" readonly=""></textarea>
+<div class="hint">This changes only through the Improve tab — that's the supervised self-editing loop.</div>
+</div>
+<div class="field">
+<label>Remembered facts</label>
+<div id="factsList"></div>
+<div class="row">
+<input id="newFact" placeholder="Teach it something about you…" style="flex:1;background:var(--ink-raised);border:1px solid var(--line);color:var(--parchment);border-radius:8px;padding:10px 12px;font-size:14px;"/>
+<button class="btn" onclick="addFact()">Add</button>
+</div>
+</div>
+<div class="field">
+<label>Self-reflections (written after conversations)</label>
+<div id="reflectionsList"></div>
+</div>
+</div>
+</div>
+<div class="view" id="view-improve">
+<div class="panel">
+<p style="color:var(--parchment-dim);font-size:14px;line-height:1.5;">
+        It can propose a change to its own instructions based on what's gone well or badly.
+        You always see the exact diff and approve or reject it — nothing changes itself unsupervised.
+      </p>
+<button class="btn" onclick="proposeImprovement()">Ask it to propose an improvement</button>
+<div id="proposalArea"></div>
+</div>
+</div>
+<div class="view" id="view-settings">
+<div class="panel">
+<div class="field">
+<label>AI backend</label>
+<div class="chip" id="backendStatus">Checking connection…</div>
+<div class="hint">Your Anthropic API key is stored only on the server and is never exposed to this browser.</div>
+</div>
+<div class="field">
+<label>Ground answers in peer-reviewed research</label>
+<div class="chip" id="researchChip" onclick="toggleResearch()">Research grounding: off</div>
+<div class="hint">When on, it searches Semantic Scholar before answering questions that sound research-relevant.</div>
+</div>
+<div class="field">
+<label>Data</label>
+<button class="btn secondary" onclick="exportData()">Export everything (JSON)</button>
+<button class="btn danger" onclick="resetAll()" style="margin-top:8px;">Reset all memory &amp; identity</button>
+</div>
+</div>
+</div>
+</main>
+<div class="toolbar" id="chatToolbar">
+<div class="chip" id="voiceChip">🎙 voice input</div>
+</div>
+<footer>
+<textarea id="input" placeholder="Say something…" rows="1"></textarea>
+<button id="micBtn" onclick="toggleMic()">🎙</button>
+<button id="sendBtn" onclick="send()">↑</button>
+</footer>
+
+<script src="api.js"></script>
+<script src="app.js"></script></body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "luna-v2-netlify",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check frontend/api.js && node --check frontend/app.js && node --check netlify/functions/chat.mjs && node --check netlify/functions/health.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
