@@ -32,3 +32,4 @@ Copy `.env.example` to `.env` and insert your own credentials. Never commit `.en
 - Anthropic credentials remain server-side.
 - Direct browser access to Anthropic is not used.
 - `.env` files are excluded by `.gitignore`.
+redeploy
